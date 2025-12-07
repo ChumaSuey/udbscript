@@ -1,5 +1,5 @@
 `#version 4`;
-`#name Remove Action Selected`;
+`#name Remove Action Selected Linedef`;
 `#description Sets the Action to 0 on all selected Linedefs.`;
 `#author Chuma`;
 

@@ -1,6 +1,6 @@
 `#version 4`;
-`#name Remove Tag Selected`;
-`#description Sets the Tag to 0 on all selected Linedefs.`;
+`#name Remove Action Selected Linedef`;
+`#description Sets the Action to 0 on all selected Linedefs.`;
 `#author Chuma`;
 
 // Get all linedefs
@@ -16,15 +16,15 @@ let count = 0;
 lines.forEach(l => {
     if (!l.selected) return;
 
-    // Reset the tag
-    if (l.tag !== 0) {
-        l.tag = 0;
+    // Reset the action
+    if (l.action !== 0) {
+        l.action = 0;
         count++;
     }
 });
 
 if (count === 0) {
-    UDB.showMessage("No linedefs selected or tags were already 0.");
+    UDB.showMessage("No linedefs selected or actions were already 0.");
 } else {
-    UDB.showMessage(`Removed tag from ${count} linedef(s).`);
+    UDB.showMessage(`Removed action from ${count} linedef(s).`);
 }
