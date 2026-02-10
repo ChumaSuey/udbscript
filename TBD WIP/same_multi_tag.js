@@ -63,4 +63,4 @@ itemsToTag.forEach(function (item) {
     }
 });
 
-UDB.showMessage("Mode-Aware: Assigned Tag " + newTag + " to " + itemsToTag.length + " " + typeName + ".");
+UDB.showMessage("Assigned Tag " + newTag + " to " + itemsToTag.length + " " + typeName + ".");
