@@ -2,6 +2,8 @@
 `#name Create 242 Invisible Wall from Floor`;
 `#description Creates an invisible wall from the floor, assigns a tag, and creates a control sector at cursor position.`;
 `#author Chuma`;
+// The algorithm is complex so comments are a bit extensive.
+// Note: This requires the script to be run via hotkey while mouse is in the map view
 
 // This script is designed to assist in creating invisible walls using the 242 transfer effect.
 // It sets up a control sector (at the mouse cursor) to create a "fake floor", allowing the
@@ -15,7 +17,6 @@ if (sectors.length === 0) {
 }
 
 // Get mouse position for the new sector
-// Note: This requires the script to be run via hotkey while mouse is in the map view
 const pos = UDB.Map.mousePosition;
 
 // Calculate Triangle Coordinates (equilateral-ish 30 units)

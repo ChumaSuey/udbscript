@@ -1,6 +1,6 @@
 `#version 4`;
-`#name Set Impassable`;
-`#description Sets the Impassable flag on selected lines. Skips lines that are already impassable.`;
+`#name Set Passable`;
+`#description Removes the Impassable flag on selected lines.Skips lines that are already passable.`;
 `#author Chuma`;
 
 // Get all linedefs
@@ -17,20 +17,19 @@ lines.forEach(line => {
 
     if (isUDMF) {
         // UDMF format - named flags
-        if (line.flags['impassable'] === true) {
+        if (line.flags['impassable'] !== true) {
             skipped++;
             return;
         }
-        line.flags['impassable'] = true;
+        line.flags['impassable'] = false;
         count++;
     } else {
         // Doom/Hexen format - numbered flags. '1' is Impassable / Block All.
-        // Note: In UDBscript, keys for numbered flags are usually strings, e.g. '1'
-        if (line.flags['1'] === true) {
+        if (line.flags['1'] !== true) {
             skipped++;
             return;
         }
-        line.flags['1'] = true;
+        line.flags['1'] = false;
         count++;
     }
 });
@@ -39,7 +38,5 @@ lines.forEach(line => {
 if (count === 0 && skipped === 0) {
     UDB.showMessage("No lines selected.");
 } else {
-    UDB.showMessage(`Set Impassable on ${count} lines. Skipped ${skipped} lines already set.`);
+    UDB.showMessage(`Set Passable on ${count} lines. Skipped ${skipped} lines already passable.`);
 }
-
-
