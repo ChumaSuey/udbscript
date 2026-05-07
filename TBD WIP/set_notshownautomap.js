@@ -1,7 +1,10 @@
 `#version 4`;
 `#name Set Not Shown on Automap`;
-`#description Sets the 'Not shown on automap' flag on selected lines.`;
+`#description Sets the 'Not shown on automap' flag on selected linedefs or sectors.`;
 `#author Chuma`;
+
+// Note: it will work with sectors and also will check if the selected lines
+// already have the flag. It will not apply the flag if it is already set.
 
 // Get all linedefs
 const lines = UDB.Map.getLinedefs();
