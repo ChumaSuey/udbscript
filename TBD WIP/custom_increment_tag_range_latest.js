@@ -3,6 +3,8 @@
 `#description Takes the selected lines or sectors and gives them a range of tags starting from the highest used tag + 1;`;
 `#author Chuma`;
 
+// Revision: Switched == to === (strict equality) for safer comparisons.
+
 `#scriptoptions
 
 X
@@ -34,10 +36,10 @@ let startTag = maxTag + 1;
 
 let elements = UDB.Map.getSelectedSectors();
 
-if (elements.length == 0)
+if (elements.length === 0)
     elements = UDB.Map.getSelectedLinedefs();
 
-if (elements.length == 0)
+if (elements.length === 0)
     UDB.die('Select lines or sectors to process');
 
 for (let i = 0; i < elements.length; i++) {

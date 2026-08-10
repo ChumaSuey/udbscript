@@ -3,6 +3,9 @@
 `#description Assigns the highest currently used Tag to selected Linedefs and Sectors.`;
 `#author Chuma`;
 
+// Revision: Verified logic. When both sectors and lines are selected, sectors take priority.
+// Linedef tagging still works when only lines are selected.
+
 // Find the highest used tag in the map
 let maxTag = 0;
 

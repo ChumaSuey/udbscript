@@ -2,6 +2,10 @@
 `#name Create 242 Invisible Wall from Floor`;
 `#description Creates an invisible wall from the floor, assigns a tag, and creates a control sector at cursor position.`;
 `#author Chuma`;
+
+// Revision: Added overrun check. If a sector's ceiling is already at or below its floor,
+// the invisible wall (floor = ceiling - 1) would create an invalid sector. That sector
+// is now skipped and logged.
 // The algorithm is complex so comments are a bit extensive.
 // Note: This requires the script to be run via hotkey while mouse is in the map view
 
@@ -66,8 +70,17 @@ const newTag = UDB.Map.getNewTag();
 
 // Apply Tag to Selected Sectors and Raise Floor (Invisible Wall)
 let taggedCount = 0;
+let skippedCount = 0;
 sectors.forEach(s => {
     s.tag = newTag;
+
+    // Revision: Overrun check -- skip if ceiling is already at or below floor
+    if (s.ceilingHeight <= s.floorHeight) {
+        UDB.log('Skipping sector ' + s.index + ': ceiling height (' + s.ceilingHeight + ') is at or below floor height (' + s.floorHeight + '). Cannot create invisible wall.');
+        skippedCount++;
+        return;
+    }
+
     // Invisible wall logic: Floor meets Ceiling (almost)
     s.floorHeight = s.ceilingHeight - 1;
     taggedCount++;
@@ -93,4 +106,8 @@ l1.tag = newTag;
     }
 });
 
-UDB.showMessage(`Created 242 Control Sector with Tag ${newTag} linked to ${taggedCount} sector(s).`);
+if (skippedCount > 0) {
+    UDB.showMessage('Created 242 Control Sector with Tag ' + newTag + ' linked to ' + taggedCount + ' sector(s). Skipped ' + skippedCount + ' sector(s) with invalid heights.');
+} else {
+    UDB.showMessage('Created 242 Control Sector with Tag ' + newTag + ' linked to ' + taggedCount + ' sector(s).');
+}
